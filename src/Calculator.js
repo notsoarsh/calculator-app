@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
-import './Calculator.css';
+
+
+
+
+import React from 'react';
+import {useState} from 'react'
+import './Calculator.css'
 
 function Calculator() {
   const [currentNumber, setCurrentNumber] = useState('0');
@@ -26,53 +31,52 @@ function Calculator() {
     }
   };
 
-  const calculate = () => {
-    let result = 0;
+  const calculate = ()=>{
+    let result =0;
     const prev = parseFloat(previousNumber);
     const current = parseFloat(currentNumber);
 
-    switch (operation) {
-      case '+':
-        result = prev + current;
-        break;
-      case '-':
-        result = prev - current;
-        break;
-      case '*':
-        result = prev * current;
-        break;
-      case '/':
-        if (current === 0) {
-          alert("Cannot divide by zero!");
-          handleClear();
-          return;
-        }
-        result = prev / current;
-        break;
-      default:
+  switch (operation) {
+    case '+':
+      result = prev + current;
+      break;
+    case '-':
+      result = prev - current;
+      break;
+    case '*':
+      result = prev * current;
+      break;
+    case '/':
+      if (current === 0) {
+        alert("Cannot divide by zero!");
+        handleClear();
         return;
-    }
+      }
+      result = prev / current;
+      break;
+    default:
+      return;
+  }
+  setCurrentNumber(String(result));
+  setPreviousNumber('');
+  setOperation('');
+};
 
-    setCurrentNumber(String(result));
-    setPreviousNumber('');
-    setOperation('');
-  };
-
-  const handleEqual = () => {
-    if (previousNumber && currentNumber && operation) {
+const handleEqual = () => {
+    if(currentNumber && previousNumber && operation){
       calculate();
     }
   };
 
-  const handleClear = () => {
+ const handleClear = () => {
     setCurrentNumber('0');
     setPreviousNumber('');
-    setOperation('');
+     setOperation('');
   };
 
   return (
-    <div className="calculator">
-      <div className="calculator-display">
+     <div className="calculator">
+     <div className="calculator-display">
         <div className="equation">
           {previousNumber} {operation} {currentNumber !== '0' ? currentNumber : ''}
         </div>
@@ -100,5 +104,6 @@ function Calculator() {
     </div>
   );
 }
+
 
 export default Calculator;
